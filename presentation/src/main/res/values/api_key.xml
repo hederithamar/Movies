@@ -1,0 +1,4 @@
+<resources>
+    <string name="api_key">Your API KEY</string>
+    <string name="api_key_v4">Your API KEY V4</string>
+</resources>

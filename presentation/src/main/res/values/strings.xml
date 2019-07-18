@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MovieTest</string>
+    <string name="splash_loader_text">Cargando...</string>
+
+    <string name="message_loading">Por favor espera…</string>
+
+    <string name="title_favorite">Popular</string>
+    <string name="title_top">Top</string>
+    <string name="title_coming">Proximamente</string>
+
+    <string name="action_accept">Aceptar</string>
+    <string name="action_continue">Continuar</string>
+    <string name="action_return">Regresar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_retry">Reintentar</string>
+</resources>

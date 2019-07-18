@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#fe485a</color>
+    <color name="colorSecondary">#fdda00</color>
+    <color name="colorAccent">#4aa8e0</color>
+    <color name="colorPrimaryDark">#fe485a</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorPrimaryText">#666666</color>
+    <color name="colorGray">#666666</color>
+
+    <color name="black_60">#666666</color>
+    <color name="white">#fff</color>
+    <color name="colorButtonDisable">#88115d76</color>
+    <color name="green">#259B24</color>
+
+    <color name="colorTransparent">#00ffffff</color>
+
+    <color name="login_background">#4aa8e0</color>
+
+    <color name="yellow">#FFA900</color>
+    <color name="gray_light">#eeeeee</color>
+
+    <color name="error_red">#ffdd0031</color>
+
+    <color name="colorBackgroundTutorial">#88ffffff</color>
+    <color name="colorLinkLight">#396DB5</color>
+
+    <color name="colorGrayButton">#dadbdd</color>
+
+    <color name="bottomNavigation">#fe485a</color>
+</resources>

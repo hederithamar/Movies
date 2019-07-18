@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    def libVersionName = "1.0.0"
+    def libVersionCode = 1
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode libVersionCode
+        versionName libVersionName
+    }
+
+
+    libraryVariants.all { variant ->
+        variant.outputs.all {
+            if (outputFile != null && outputFileName.endsWith('.aar')) {
+                outputFileName = "${archivesBaseName}-${libVersionName}.aar"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    aaptOptions {
+        noCompress "tflite"
+    }
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.annotations
+    implementation deps.okhttp3
+    implementation deps.retrofit2
+    implementation deps.rxjava2
+    implementation deps.dagger
+    annotationProcessor deps.daggerCompiler
+}

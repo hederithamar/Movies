@@ -1,0 +1,137 @@
+apply plugin: 'com.android.application'
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'realm-android'
+
+realm {
+    syncEnabled = true
+}
+
+android {
+    buildToolsVersion '28.0.3'
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        renderscriptTargetApi 21
+        renderscriptSupportModeEnabled true
+        multiDexEnabled true
+    }
+    signingConfigs {
+        releaseMovieTest {
+            keyAlias 'Alias'
+            keyPassword 'Alias1*'
+            storeFile file('/Users/briix/keys/Movie.jks')
+            storePassword 'Pass1*'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            testCoverageEnabled false
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    def appVersion = "1.0.0"
+
+    def versionCodeMovieTestDev = 1
+    def versionCodeMovieTestProd = 1
+
+
+    applicationVariants.all { variant ->
+        def versionCode, versionName = ""
+
+        if (variant.flavorName.contains("movietest")) {
+            if (variant.flavorName.contains("Development")) {
+                versionCode = versionCodeMovieTestDev
+                versionName = appVersion + " (" + versionCode + ")"
+
+            } else if (variant.flavorName.contains("Production")) {
+                versionCode = versionCodeMovieTestProd
+                versionName = appVersion
+            }
+        }
+
+        if (variant.buildType.getName().equals("debug"))
+            versionName += " -debug"
+
+        variant.outputs.all {
+            setVersionCodeOverride(versionCode)
+            setVersionNameOverride(versionName)
+        }
+        variant.resValue "string", "versionName", versionName
+        variant.resValue "string", "versionNameDesc", "Versión: " + versionName
+    }
+
+    flavorDimensions "movie", "environment"
+
+
+    productFlavors {
+        development {
+            dimension "environment"
+            buildConfigField "String", "SERVICE_VERSION", "\"1.0.0\""
+        }
+
+        production {
+            dimension "environment"
+            buildConfigField "String", "SERVICE_VERSION", "\"1.0.0\""
+        }
+
+        movietest {
+            applicationId "briix.com.movies"
+            dimension "movie"
+            buildConfigField "String", "MOVIE_ID", "\"\""
+            signingConfig signingConfigs.releaseMovieTest
+        }
+
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "com.android.support:support-v4:${versions.support}"
+    implementation "com.android.support:support-vector-drawable:${versions.support}"
+    implementation "com.android.support:appcompat-v7:${versions.support}"
+    implementation "com.android.support:cardview-v7:${versions.support}"
+    implementation "com.android.support:design:${versions.support}"
+    implementation "com.android.support:gridlayout-v7:${versions.support}"
+    implementation "com.android.support.constraint:constraint-layout:${versions.constraint}"
+    // Dagger
+    implementation "com.google.dagger:dagger:${versions.dagger}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
+    //RxJava
+    implementation 'javax.inject:javax.inject:1'
+    implementation "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}"
+    implementation "io.reactivex.rxjava2:rxjava:${versions.rxjava2}"
+    //Retrofit
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit2}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit2}"
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit2}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3}"
+    //Navigation Component
+    implementation "android.arch.navigation:navigation-fragment:${versions.navigation}"
+    implementation "android.arch.navigation:navigation-ui:${versions.navigation}"
+
+    implementation "com.jakewharton.timber:timber:${versions.timber}"
+    implementation "com.airbnb.android:lottie:${versions.lottie}"
+    implementation "com.github.bumptech.glide:glide:${versions.glide}"
+    //Test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
+    //Library Local
+    implementation project(path: ':data')
+}
