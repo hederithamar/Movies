@@ -3,8 +3,7 @@ package briix.com.movies;
 import android.app.Application;
 
 import briix.com.data.di.ApiMovieModule;
-import briix.com.movies.data.Preferences;
-import briix.com.movies.data.PreferencesImpl;
+import briix.com.data.di.ContextModule;
 import briix.com.movies.di.AppComponent;
 import briix.com.movies.di.DaggerAppComponent;
 import briix.com.movies.utils.Constants;
@@ -14,7 +13,6 @@ import timber.log.Timber;
 
 public class BaseApp extends Application {
     private static BaseApp instance;
-    private Preferences mPreferences;
 
     public static BaseApp getInstance() {
         return instance;
@@ -28,7 +26,6 @@ public class BaseApp extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        mPreferences = PreferencesImpl.getInstance(this);
         initLibrary();
         setupRealm();
         configureTimber();
@@ -37,6 +34,7 @@ public class BaseApp extends Application {
 
     private void initLibrary() {
         sAppComponent = DaggerAppComponent.builder()
+                .contextModule(new ContextModule(getApplicationContext()))
                 .apiMovieModule(new ApiMovieModule(mURL, getString(R.string.api_key),
                         getString(R.string.api_key_v4), "1.0"))
                 .build();

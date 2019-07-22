@@ -1,8 +1,9 @@
-package briix.com.movies.data;
+package briix.com.data.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+
 
 public class PreferencesImpl implements Preferences {
 
@@ -10,6 +11,8 @@ public class PreferencesImpl implements Preferences {
     private static final String APP_PREFERENCES_LEGACY = "e-sar";
 
     private static final String IS_LOGGED = "is_logged";
+    private static final String ACCOUNT_ID = "account_id";
+    private static final String ACCESS_TOKEN = "access_token";
 
     private static PreferencesImpl mInstance;
     private final SharedPreferences preferences;
@@ -42,4 +45,27 @@ public class PreferencesImpl implements Preferences {
         editor.apply();
     }
 
+    @Override
+    public String getAccountId() {
+        return preferences.getString(ACCOUNT_ID, "");
+    }
+
+    @Override
+    public void setAccountId(String accountId) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(ACCOUNT_ID);
+        editor.apply();
+    }
+
+    @Override
+    public String getAccessToken() {
+        return preferences.getString(ACCESS_TOKEN, "");
+    }
+
+    @Override
+    public void setAccessToken(String accountId) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(ACCESS_TOKEN);
+        editor.apply();
+    }
 }

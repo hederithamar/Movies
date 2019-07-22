@@ -1,14 +1,18 @@
 package briix.com.data.di;
 
+import android.content.Context;
+import android.preference.Preference;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Singleton;
 
+import briix.com.data.preferences.Preferences;
 import briix.com.data.services.MovieApi;
 import briix.com.data.utils.InterceptorApiMovieService;
 import dagger.Module;
@@ -21,18 +25,19 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module
+@Module(includes = {PreferencesModule.class})
 public class ApiMovieModule {
     private static final int TIMEOUT = 300;
-
     private String mBaseUrl;
     private String mApiKey;
     private String mAccessToken;
     private String appVersion;
     private boolean isLogEnabled = true;
 
+    Preference mPreference;
 
-    public ApiMovieModule(String baseUrl, String apikey, String accessToken, String appVersion) {
+    public ApiMovieModule(String baseUrl, String apikey, String accessToken,
+                          String appVersion) {
         this.mBaseUrl = baseUrl;
         this.mApiKey = apikey;
         this.mAccessToken = accessToken;
@@ -40,22 +45,20 @@ public class ApiMovieModule {
     }
 
     @Provides
-    @Singleton
     public MovieApi provideMovieApi(@Named("retrofitMovie") Retrofit retrofit) {
         return retrofit.create(MovieApi.class);
     }
 
     @Provides
-    @Singleton
     @Named("retrofitMovie")
     public Retrofit provideRetrofitMovie(@Named("retrofitBuilderMovie") Retrofit.Builder builder) {
         return builder.baseUrl(mBaseUrl).build();
     }
 
+    @Inject
     @Provides
-    @Singleton
     @Named("retrofitBuilderMovie")
-    public Retrofit.Builder provideRetrofitBuilderMovie(@Named("convertFactoryMovie") Converter.Factory converterFactory) {
+    public Retrofit.Builder provideRetrofitBuilderMovie(@Named("convertFactoryMovie") Converter.Factory converterFactory, Preferences mPreferences) {
 
         final OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
@@ -66,7 +69,7 @@ public class ApiMovieModule {
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
-                .addInterceptor(new InterceptorApiMovieService(mApiKey, mAccessToken))
+                .addInterceptor(new InterceptorApiMovieService(mApiKey, mAccessToken, mPreferences))
                 .build();
 
         return new Retrofit.Builder()
@@ -76,14 +79,12 @@ public class ApiMovieModule {
     }
 
     @Provides
-    @Singleton
     @Named("convertFactoryMovie")
     public Converter.Factory provideConverterFactoryMovie(@Named("gsonMovie") Gson gson) {
         return GsonConverterFactory.create(gson);
     }
 
     @Provides
-    @Singleton
     @Named("gsonMovie")
     public Gson provideGsonMovie() {
         return new GsonBuilder()

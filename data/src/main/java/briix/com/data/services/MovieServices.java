@@ -24,6 +24,10 @@ public class MovieServices {
         return mMovieApi.createAccessToken(mRequest).toObservable();
     }
 
+    public Observable<ResponseCreateAccessToken> getListMovies(int mListId, Map<String, String> mOptions) {
+        return mMovieApi.getListMovies(mListId, mOptions).toObservable();
+    }
+
     public Observable<ResponseMovies> getPopularMovies(Map<String, String> mOptions) {
         return mMovieApi.getPopularMovies(mOptions).toObservable();
     }

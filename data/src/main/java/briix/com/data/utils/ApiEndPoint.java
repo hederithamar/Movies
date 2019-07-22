@@ -6,6 +6,8 @@ public final class ApiEndPoint {
 
     public static final String ENDPOINT_CREATE_ACCESS_TOKEN = "auth/access_token?";
 
+    public static final String ENDPOINT_GET_LIST_MOVIES= "list/{list_id}?";
+
     public static final String ENDPOINT_POPULAR_MOVIES = "movie/popular?";
 
     public static final String ENDPOINT_TOP_RATED_MOVIES = "movie/top_rated?";

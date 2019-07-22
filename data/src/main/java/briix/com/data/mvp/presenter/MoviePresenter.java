@@ -27,7 +27,6 @@ public class MoviePresenter<V extends MovieView> extends BasePresenter<MovieView
 
     @Inject
     public MoviePresenter(MovieServices movieService) {
-
         this.mMovieService = movieService;
     }
 
@@ -74,6 +73,37 @@ public class MoviePresenter<V extends MovieView> extends BasePresenter<MovieView
                         getMvpView().hideLoading();
                         if (response != null) {
                             getMvpView().onSuccessCreateAccessToken(response);
+                        } else {
+                            getMvpView().onServiceError(new Error(response, service));
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleServiceError(e, service);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+        unsubscribeOnDestroy(disposable);
+
+    }
+
+    @Override
+    public void getListMovies(int mListId, Map<String, String> mOptions) {
+        final int service = MServicesMovie.GET_LIST_MOVIES;
+        getMvpView().showLoading();
+        final Observable<ResponseCreateAccessToken> observable = mMovieService.getListMovies(mListId, mOptions);
+        Disposable disposable = observable.compose(CommonUtils.<ResponseCreateAccessToken>applySchedulers())
+                .subscribeWith(new DisposableObserver<ResponseCreateAccessToken>() {
+                    @Override
+                    public void onNext(ResponseCreateAccessToken response) {
+                        getMvpView().hideLoading();
+                        if (response != null) {
+                            getMvpView().onSuccessGetListMovies(response);
                         } else {
                             getMvpView().onServiceError(new Error(response, service));
                         }

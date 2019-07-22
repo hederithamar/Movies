@@ -11,6 +11,7 @@ import briix.com.data.mvp.model.response.ResponseToken;
 import briix.com.data.utils.ApiEndPoint;
 import io.reactivex.Single;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -26,6 +27,10 @@ public interface MovieApi {
     @Headers("Content-Type: application/json")
     @POST(ApiEndPoint.ENDPOINT_CREATE_ACCESS_TOKEN)
     Single<ResponseCreateAccessToken> createAccessToken(@Body RequestCreateAccessToken mRequest);
+
+    @Headers("Content-Type: application/json")
+    @GET(ApiEndPoint.ENDPOINT_GET_LIST_MOVIES)
+    Single<ResponseCreateAccessToken> getListMovies(@Path("list_id") int listId, @QueryMap Map<String, String> options);
 
     @Headers("Content-Type: application/json")
     @POST(ApiEndPoint.ENDPOINT_POPULAR_MOVIES)

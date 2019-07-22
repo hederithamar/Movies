@@ -16,7 +16,6 @@ import java.util.List;
 
 import briix.com.movies.R;
 import briix.com.movies.adapter.MovieAdapter;
-import briix.com.movies.data.Preferences;
 import briix.com.movies.databinding.FragmentHomeMovieBinding;
 import briix.com.movies.model.Movie;
 import briix.com.movies.realm.RealmController;
@@ -33,7 +32,6 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
     private List<Movie> mMovieList = new ArrayList<>();
     private MovieAdapter mMovieAdapter;
 
-    private Preferences mPreferences;
 
 
     public HomeMovieFragment() {

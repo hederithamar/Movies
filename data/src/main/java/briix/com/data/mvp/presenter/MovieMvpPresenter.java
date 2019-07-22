@@ -15,7 +15,9 @@ public interface MovieMvpPresenter<V extends MovieView> extends MvpPresenter<Mov
 
     void createAccessToken(RequestCreateAccessToken mRequest);
 
-    void getPopularMovies(Map<String, String> mOptions);
+    void getListMovies(int mListId, Map<String, String> mOptions);
+
+    void getPopularMovies( Map<String, String> mOptions);
 
     void getTopRatedMovies(Map<String, String> mOptions);
 

@@ -12,6 +12,8 @@ public interface MovieView extends MvpView {
 
     void onSuccessCreateAccessToken(ResponseCreateAccessToken response);
 
+    void onSuccessGetListMovies(ResponseCreateAccessToken response);
+
     void onSuccessGetPopularMovies(ResponseMovies response);
 
     void onSuccessGettopRatedMovies(ResponseMovies response);

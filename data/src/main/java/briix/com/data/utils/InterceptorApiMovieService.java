@@ -4,6 +4,11 @@ import android.support.annotation.NonNull;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
+
+import briix.com.data.preferences.Preferences;
+import briix.com.data.preferences.PreferencesImpl;
+import briix.com.data.services.MovieServices;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -13,11 +18,14 @@ public class InterceptorApiMovieService implements Interceptor {
 
     private static final String KEY_API_KEY = "api_key";
     private final String mApiKey;
-    private final String mAccessToken;
+    private String mAccessToken;
 
-    public InterceptorApiMovieService(String apiKey, String accessToken) {
+    public Preferences mPreferences;
+
+    public InterceptorApiMovieService(String apiKey, String accessToken, Preferences mPreferences) {
         this.mApiKey = apiKey;
         this.mAccessToken = accessToken;
+        this.mPreferences = mPreferences;
     }
 
     @Override
@@ -29,10 +37,21 @@ public class InterceptorApiMovieService implements Interceptor {
                 .addQueryParameter(KEY_API_KEY, mApiKey)
                 .build();
 
-        // Request customization: add request headers
-        Request.Builder requestBuilder = originalRequest.newBuilder()
-                .addHeader("Authorization", "Bearer " + mAccessToken)
-                .url(url);
+        Request.Builder requestBuilder;
+
+        if (mPreferences.getAccessToken() == null || mPreferences.getAccessToken().isEmpty()) {
+            // Request customization: add request headers
+            requestBuilder = originalRequest.newBuilder()
+                    .addHeader("Authorization", "Bearer " + mAccessToken)
+                    .url(url);
+        } else {
+            // Request customization: add request headers
+            requestBuilder = originalRequest.newBuilder()
+                    .addHeader("Authorization", "Bearer " + mPreferences.getAccessToken())
+                    .url(url);
+
+        }
+
 
         return chain.proceed(requestBuilder.build());
     }

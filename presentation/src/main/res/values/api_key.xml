@@ -1,4 +1,5 @@
 <resources>
-    <string name="api_key">Your API KEY</string>
-    <string name="api_key_v4">Your API KEY V4</string>
+    <string name="api_key">b3271524f02e134e8cf8e41b116866ed</string>
+    <string name="api_key_v4">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMzI3MTUyNGYwMmUxMzRlOGNmOGU0MWIxMTY4NjZlZCIsInN1YiI6IjVkMGJhOGYzYzNhMzY4MDYzYTFlYmM1MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.K-QPX14sUck3xGRHzuRzWw3Bwh4J7NSjNfVt1mejGpY</string>
+    <string name="id_account">5d0ba8f3c3a368063a1ebc53</string>
 </resources>

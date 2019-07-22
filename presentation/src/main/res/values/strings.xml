@@ -13,4 +13,6 @@
     <string name="action_return">Regresar</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_retry">Reintentar</string>
+
+    <string name="url_access">https://www.themoviedb.org/auth/access?request_token=%s</string>
 </resources>
