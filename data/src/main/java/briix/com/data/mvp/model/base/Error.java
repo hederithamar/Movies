@@ -1,8 +1,9 @@
 package briix.com.data.mvp.model.base;
 
-import briix.com.data.mvp.model.response.ResponseCreateAccessToken;
 import briix.com.data.mvp.model.response.ResponseMovies;
-import briix.com.data.mvp.model.response.ResponseToken;
+import briix.com.domain.entities.auth.TokenEntity;
+import briix.com.domain.entities.auth.CreateAccessTokenEntity;
+import briix.com.domain.entities.home.MoviesEntity;
 
 public class Error {
 
@@ -28,7 +29,7 @@ public class Error {
 
     }
 
-    public Error(ResponseToken response, int service) {
+    public Error(TokenEntity response, int service) {
         this.serviceId = service;
         this.httpCode = response.getStatusCode();
         this.exception = response.getStatusMessage();
@@ -36,7 +37,7 @@ public class Error {
         this.cveDiagnostic = response.getStatusMessage();
     }
 
-    public Error(ResponseCreateAccessToken response, int service) {
+    public Error(CreateAccessTokenEntity response, int service) {
         this.serviceId = service;
         this.httpCode = response.getStatusCode();
         this.exception = response.getStatusMessage();
@@ -44,7 +45,7 @@ public class Error {
         this.cveDiagnostic = response.getStatusMessage();
     }
 
-    public Error(ResponseMovies response, int service) {
+    public Error(MoviesEntity response, int service) {
         this.serviceId = service;
         this.httpCode = response.getPage();
         this.exception = "Error";

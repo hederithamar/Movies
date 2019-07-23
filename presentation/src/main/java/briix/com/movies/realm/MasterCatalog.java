@@ -4,6 +4,8 @@ import java.util.List;
 
 import briix.com.data.mvp.model.response.ResponseMovie;
 import briix.com.data.mvp.model.response.ResponseMovies;
+import briix.com.domain.entities.home.MovieEntity;
+import briix.com.domain.entities.home.MoviesEntity;
 import briix.com.movies.realm.model.ComingMovieEntity;
 import briix.com.movies.realm.model.GeneralMovieEntity;
 import briix.com.movies.realm.model.PopularMovieEntity;
@@ -33,7 +35,7 @@ public class MasterCatalog extends RealmObject {
     private RealmList<TopRatedMovieEntity> movieTopList;
     private RealmList<ComingMovieEntity> movieComingList;
 
-    public MasterCatalog(ResponseMovies response, int service) {
+    public MasterCatalog(MoviesEntity response, int service) {
         buildRealmListObjects(response, service);
     }
 
@@ -94,38 +96,38 @@ public class MasterCatalog extends RealmObject {
         this.movieGeneralList = movieGeneralList;
     }
 
-    private void buildRealmListObjects(ResponseMovies response, int service) {
+    private void buildRealmListObjects(MoviesEntity response, int service) {
 
         switch (service) {
             case GET_LIST_MOVIES:
                 movieGeneralList = new RealmList<>();
-                List<ResponseMovie> mGeneralList = response.getMovieList();
+                List<MovieEntity> mGeneralList = response.getMovieList();
                 if (mGeneralList != null)
-                    for (ResponseMovie movie : mGeneralList) {
+                    for (MovieEntity movie : mGeneralList) {
                         movieGeneralList.add(new GeneralMovieEntity(movie, service));
                     }
                 break;
             case GET_POPULAR_MOVIES:
                 moviePopularList = new RealmList<>();
-                List<ResponseMovie> mPopularList = response.getMovieList();
+                List<MovieEntity> mPopularList = response.getMovieList();
                 if (mPopularList != null)
-                    for (ResponseMovie movie : mPopularList) {
+                    for (MovieEntity movie : mPopularList) {
                         moviePopularList.add(new PopularMovieEntity(movie, service));
                     }
                 break;
             case GET_TOP_RATED_MOVIES:
                 movieTopList = new RealmList<>();
-                List<ResponseMovie> mTopList = response.getMovieList();
+                List<MovieEntity> mTopList = response.getMovieList();
                 if (mTopList != null)
-                    for (ResponseMovie movie : mTopList) {
+                    for (MovieEntity movie : mTopList) {
                         movieTopList.add(new TopRatedMovieEntity(movie, service));
                     }
                 break;
             case GET_UPCOMING_MOVIES:
                 movieComingList = new RealmList<>();
-                List<ResponseMovie> mComingList = response.getMovieList();
+                List<MovieEntity> mComingList = response.getMovieList();
                 if (mComingList != null)
-                    for (ResponseMovie psCountry : mComingList) {
+                    for (MovieEntity psCountry : mComingList) {
                         movieComingList.add(new ComingMovieEntity(psCountry, service));
                     }
                 break;

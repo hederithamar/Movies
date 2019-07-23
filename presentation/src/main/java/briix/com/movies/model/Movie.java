@@ -12,7 +12,6 @@ import briix.com.movies.realm.model.GeneralMovieEntity;
 import briix.com.movies.realm.model.MovieDetailsEntity;
 import briix.com.movies.realm.model.TopRatedMovieEntity;
 import briix.com.movies.realm.model.PopularMovieEntity;
-import io.realm.annotations.PrimaryKey;
 
 public class Movie implements Parcelable {
 
@@ -22,7 +21,6 @@ public class Movie implements Parcelable {
     public static final String backdropBaseUrl = "https://image.tmdb.org/t/p/w780";
     public static final String youTubeBaseUrl = "https://www.youtube.com/watch?v=";
 
-    @PrimaryKey
     protected int id;
     protected int voteCount;
     protected boolean video;

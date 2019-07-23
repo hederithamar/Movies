@@ -4,11 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.io.IOException;
 
-import javax.inject.Inject;
-
 import briix.com.data.preferences.Preferences;
-import briix.com.data.preferences.PreferencesImpl;
-import briix.com.data.services.MovieServices;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;

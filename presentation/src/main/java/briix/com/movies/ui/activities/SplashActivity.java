@@ -14,14 +14,13 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import briix.com.data.mvp.model.base.Error;
-import briix.com.data.mvp.model.request.RequestCreateAccessToken;
-import briix.com.data.mvp.model.request.RequestToken;
-import briix.com.data.mvp.model.response.ResponseCreateAccessToken;
 import briix.com.data.mvp.model.response.ResponseMovies;
-import briix.com.data.mvp.model.response.ResponseToken;
 import briix.com.data.mvp.presenter.MovieMvpPresenter;
 import briix.com.data.mvp.view.MovieView;
 import briix.com.data.preferences.Preferences;
+import briix.com.domain.entities.auth.TokenEntity;
+import briix.com.domain.entities.auth.CreateAccessTokenEntity;
+import briix.com.domain.entities.home.MoviesEntity;
 import briix.com.movies.BaseApp;
 import briix.com.movies.R;
 import briix.com.movies.databinding.ActivitySplashBinding;
@@ -90,13 +89,13 @@ public class SplashActivity extends BaseMvpActivity implements MovieView, OnActi
     }
 
     @Override
-    public void onSuccessGetToken(ResponseToken response) {
+    public void onSuccessGetToken(TokenEntity response) {
         mToken = response.getRequestToken();
         navigateWebView();
     }
 
     @Override
-    public void onSuccessCreateAccessToken(ResponseCreateAccessToken response) {
+    public void onSuccessCreateAccessToken(CreateAccessTokenEntity response) {
         mToken = response.getAccessToken();
         mPreferences.setAccessToken(response.getAccessToken());
         mPreferences.setAccountId(response.getAccountId());
@@ -104,7 +103,7 @@ public class SplashActivity extends BaseMvpActivity implements MovieView, OnActi
     }
 
     @Override
-    public void onSuccessGetListMovies(ResponseMovies response) {
+    public void onSuccessGetListMovies(MoviesEntity response) {
         RealmController.withInstance().updateCatalog(response, GET_LIST_MOVIES);
         RealmController.withInstance().updateCatalog(response, GET_POPULAR_MOVIES);
         RealmController.withInstance().updateCatalog(response, GET_TOP_RATED_MOVIES);
@@ -113,31 +112,31 @@ public class SplashActivity extends BaseMvpActivity implements MovieView, OnActi
     }
 
     @Override
-    public void onSuccessGetPopularMovies(ResponseMovies response) {
+    public void onSuccessGetPopularMovies(MoviesEntity response) {
         RealmController.withInstance().updateCatalog(response, GET_POPULAR_MOVIES);
 
         mPresenter.getTopRatedMovies(mData);
     }
 
     @Override
-    public void onSuccessGettopRatedMovies(ResponseMovies response) {
+    public void onSuccessGettopRatedMovies(MoviesEntity response) {
         RealmController.withInstance().updateCatalog(response, GET_TOP_RATED_MOVIES);
         mPresenter.getUpcomingMovies(mData);
     }
 
     @Override
-    public void onSuccessGetUpcomingMovies(ResponseMovies response) {
+    public void onSuccessGetUpcomingMovies(MoviesEntity response) {
         RealmController.withInstance().updateCatalog(response, GET_UPCOMING_MOVIES);
         launchMain();
     }
 
     @Override
-    public void onSuccessSearchMovie(ResponseMovies response) {
+    public void onSuccessSearchMovie(MoviesEntity response) {
 
     }
 
     @Override
-    public void onSuccessMovieDetails(ResponseMovies response) {
+    public void onSuccessMovieDetails(MoviesEntity response) {
 
     }
 
@@ -170,14 +169,13 @@ public class SplashActivity extends BaseMvpActivity implements MovieView, OnActi
 
     @Override
     public void onGetToken() {
-        RequestToken requestToken = new RequestToken("");
-        mPresenter.getToken(requestToken);
+        mPresenter.getToken("");
     }
 
     @Override
     public void onValidatePassToken() {
-        RequestCreateAccessToken mRequest = new RequestCreateAccessToken(mToken);
-        mPresenter.createAccessToken(mRequest);
+
+        mPresenter.createAccessToken(mToken);
     }
 
     @Override

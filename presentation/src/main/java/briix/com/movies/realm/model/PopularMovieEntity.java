@@ -2,6 +2,7 @@ package briix.com.movies.realm.model;
 
 
 import briix.com.data.mvp.model.response.ResponseMovie;
+import briix.com.domain.entities.home.MovieEntity;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -29,7 +30,7 @@ public class PopularMovieEntity extends RealmObject {
     public PopularMovieEntity() {
     }
 
-    public PopularMovieEntity(ResponseMovie movie, int service) {
+    public PopularMovieEntity(MovieEntity movie, int service) {
         this.id = movie.getId();
         this.voteCount = movie.getVoteCount();
         this.video = movie.isVideo();

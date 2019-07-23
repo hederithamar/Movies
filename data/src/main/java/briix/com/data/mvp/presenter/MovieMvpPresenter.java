@@ -11,9 +11,9 @@ import briix.com.data.mvp.view.MovieView;
 
 public interface MovieMvpPresenter<V extends MovieView> extends MvpPresenter<MovieView> {
 
-    void getToken(RequestToken mRequest);
+    void getToken(String redirectTo);
 
-    void createAccessToken(RequestCreateAccessToken mRequest);
+    void createAccessToken(String requestToken);
 
     void getListMovies(int mListId, Map<String, String> mOptions);
 

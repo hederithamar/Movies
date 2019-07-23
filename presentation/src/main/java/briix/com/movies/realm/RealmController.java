@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 
 import briix.com.data.mvp.model.response.ResponseMovies;
+import briix.com.domain.entities.home.MoviesEntity;
 import briix.com.movies.realm.model.ComingMovieEntity;
 import briix.com.movies.realm.model.GeneralMovieEntity;
 import briix.com.movies.realm.model.PopularMovieEntity;
@@ -69,7 +70,7 @@ public class RealmController {
         });
     }
 
-    public void updateCatalog(ResponseMovies movies, int service) {
+    public void updateCatalog(MoviesEntity movies, int service) {
         //RealmController.withInstance().cleanDB();
         MasterCatalog masterCatalog = new MasterCatalog(movies, service);
         RealmController.withInstance().saveCatalog(masterCatalog);

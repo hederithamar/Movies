@@ -1,27 +1,27 @@
 package briix.com.data.mvp.view;
 
 
-import briix.com.data.mvp.model.response.ResponseCreateAccessToken;
-import briix.com.data.mvp.model.response.ResponseMovies;
-import briix.com.data.mvp.model.response.ResponseToken;
+import briix.com.domain.entities.auth.TokenEntity;
+import briix.com.domain.entities.auth.CreateAccessTokenEntity;
+import briix.com.domain.entities.home.MoviesEntity;
 
 public interface MovieView extends MvpView {
     String TAG = "MovieView";
 
-    void onSuccessGetToken(ResponseToken response);
+    void onSuccessGetToken(TokenEntity response);
 
-    void onSuccessCreateAccessToken(ResponseCreateAccessToken response);
+    void onSuccessCreateAccessToken(CreateAccessTokenEntity response);
 
-    void onSuccessGetListMovies(ResponseMovies response);
+    void onSuccessGetListMovies(MoviesEntity response);
 
-    void onSuccessGetPopularMovies(ResponseMovies response);
+    void onSuccessGetPopularMovies(MoviesEntity response);
 
-    void onSuccessGettopRatedMovies(ResponseMovies response);
+    void onSuccessGettopRatedMovies(MoviesEntity response);
 
-    void onSuccessGetUpcomingMovies(ResponseMovies response);
+    void onSuccessGetUpcomingMovies(MoviesEntity response);
 
-    void onSuccessSearchMovie(ResponseMovies response);
+    void onSuccessSearchMovie(MoviesEntity response);
 
-    void onSuccessMovieDetails(ResponseMovies response);
+    void onSuccessMovieDetails(MoviesEntity response);
 
 }

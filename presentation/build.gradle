@@ -139,4 +139,5 @@ dependencies {
 
     //Library Local
     implementation project(path: ':data')
+    implementation project(path: ':domain')
 }

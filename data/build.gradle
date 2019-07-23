@@ -46,4 +46,7 @@ dependencies {
     implementation deps.rxjava2
     implementation deps.dagger
     annotationProcessor deps.daggerCompiler
+
+    //Library Local
+    implementation project(path: ':domain')
 }
