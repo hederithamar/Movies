@@ -45,7 +45,7 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_web_view, container, false);
-
+        showLoading();
         loadArguments();
         setUpWebView();
         setListeners();
@@ -109,12 +109,6 @@ public class WebViewFragment extends BaseFragment implements View.OnClickListene
             view.loadUrl(url);
             return true;
 
-        }
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            super.onPageStarted(view, url, favicon);
-            showLoading();
         }
 
         @Override

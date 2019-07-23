@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 import briix.com.data.mvp.model.response.ResponseMovies;
 import briix.com.movies.realm.model.ComingMovieEntity;
+import briix.com.movies.realm.model.GeneralMovieEntity;
 import briix.com.movies.realm.model.PopularMovieEntity;
+import briix.com.movies.realm.model.TopRatedMovieEntity;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 
@@ -68,7 +70,7 @@ public class RealmController {
     }
 
     public void updateCatalog(ResponseMovies movies, int service) {
-        RealmController.withInstance().cleanDB();
+        //RealmController.withInstance().cleanDB();
         MasterCatalog masterCatalog = new MasterCatalog(movies, service);
         RealmController.withInstance().saveCatalog(masterCatalog);
     }
@@ -90,10 +92,25 @@ public class RealmController {
         }
     }
 
+    public ArrayList<GeneralMovieEntity> getGeneralMovies() {
+        RealmQuery<GeneralMovieEntity> query = realm.where(GeneralMovieEntity.class);
+        return new ArrayList<>(query.findAll());
+    }
 
-    public ArrayList<ComingMovieEntity> getPopularMovies() {
+    public ArrayList<PopularMovieEntity> getPopularMovies() {
+        RealmQuery<PopularMovieEntity> query = realm.where(PopularMovieEntity.class);
+        return new ArrayList<>(query.findAll());
+    }
+
+    public ArrayList<TopRatedMovieEntity> getTopRatedMovies() {
+        RealmQuery<TopRatedMovieEntity> query = realm.where(TopRatedMovieEntity.class);
+        return new ArrayList<>(query.findAll());
+    }
+
+    public ArrayList<ComingMovieEntity> getComingMovies() {
         RealmQuery<ComingMovieEntity> query = realm.where(ComingMovieEntity.class);
         return new ArrayList<>(query.findAll());
     }
+
 
 }

@@ -100,11 +100,15 @@ public class SplashActivity extends BaseMvpActivity implements MovieView, OnActi
         mToken = response.getAccessToken();
         mPreferences.setAccessToken(response.getAccessToken());
         mPreferences.setAccountId(response.getAccountId());
-        getListMovies();
+        onGetListMovies();
     }
 
     @Override
-    public void onSuccessGetListMovies(ResponseCreateAccessToken response) {
+    public void onSuccessGetListMovies(ResponseMovies response) {
+        RealmController.withInstance().updateCatalog(response, GET_LIST_MOVIES);
+        RealmController.withInstance().updateCatalog(response, GET_POPULAR_MOVIES);
+        RealmController.withInstance().updateCatalog(response, GET_TOP_RATED_MOVIES);
+        RealmController.withInstance().updateCatalog(response, GET_UPCOMING_MOVIES);
         launchMain();
     }
 
@@ -160,8 +164,8 @@ public class SplashActivity extends BaseMvpActivity implements MovieView, OnActi
             listener = getUpcomingMovies;
 
 
-        DialogUtils.showMessageBlurDialogGeneric(this, error.getException(), error.getMessage(),
-                getString(R.string.action_retry), null, listener);
+        DialogUtils.showMessageBlurDialogGeneric(this, error.getCveDiagnostic(), error.getException(), error.getMessage(),
+                getString(R.string.action_retry), getString(R.string.action_cancel), listener);
     }
 
     @Override
@@ -176,28 +180,42 @@ public class SplashActivity extends BaseMvpActivity implements MovieView, OnActi
         mPresenter.createAccessToken(mRequest);
     }
 
-    private void getListMovies(){
+    @Override
+    public void onGetListMovies() {
         mPresenter.getListMovies(1,  mData);
     }
+
 
     DialogInterface.OnClickListener getRequestTokenListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            onBackPressed();
+            if (DialogInterface.BUTTON_POSITIVE == which) {
+                onGetToken();
+            } else{
+                dialog.dismiss();
+            }
         }
     };
 
     DialogInterface.OnClickListener createAccessTokenListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            onGetToken();
+            if (DialogInterface.BUTTON_POSITIVE == which) {
+                onValidatePassToken();
+            } else{
+                dialog.dismiss();
+            }
         }
     };
 
     DialogInterface.OnClickListener getListMovies= new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            getListMovies();
+            if (DialogInterface.BUTTON_POSITIVE == which) {
+                onValidatePassToken();
+            } else{
+                onGetListMovies();
+            }
         }
     };
 

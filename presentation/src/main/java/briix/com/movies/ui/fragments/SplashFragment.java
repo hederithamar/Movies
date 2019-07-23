@@ -66,7 +66,7 @@ public class SplashFragment extends Fragment {
         if (isDbOutdated) {
             onActionsServices.onGetToken();
         } else {
-
+            onActionsServices.onGetListMovies();
         }
     }
 

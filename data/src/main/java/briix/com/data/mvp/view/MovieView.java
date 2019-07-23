@@ -12,7 +12,7 @@ public interface MovieView extends MvpView {
 
     void onSuccessCreateAccessToken(ResponseCreateAccessToken response);
 
-    void onSuccessGetListMovies(ResponseCreateAccessToken response);
+    void onSuccessGetListMovies(ResponseMovies response);
 
     void onSuccessGetPopularMovies(ResponseMovies response);
 

@@ -50,7 +50,7 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     public void showLoading() {
 
         if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(mActivity);
+            mProgressDialog = new ProgressDialog(mActivity, R.style.AppBase_Dialog);
             mProgressDialog.setMessage(getString(R.string.message_loading));
             mProgressDialog.setIndeterminate(true);
             mProgressDialog.setCancelable(false);

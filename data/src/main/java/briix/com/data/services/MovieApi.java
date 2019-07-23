@@ -20,17 +20,17 @@ import retrofit2.http.QueryMap;
 
 public interface MovieApi {
 
-    @Headers("Content-Type: application/json")
+    @Headers({"Content-Type: application/json", "No-Authentication:true"})
     @POST(ApiEndPoint.ENDPOINT_REQUEST_TOKEN)
     Single<ResponseToken> getToken(@Body RequestToken mRequest);
 
-    @Headers("Content-Type: application/json")
+    @Headers({"Content-Type: application/json", "No-Authentication:true"})
     @POST(ApiEndPoint.ENDPOINT_CREATE_ACCESS_TOKEN)
     Single<ResponseCreateAccessToken> createAccessToken(@Body RequestCreateAccessToken mRequest);
 
     @Headers("Content-Type: application/json")
     @GET(ApiEndPoint.ENDPOINT_GET_LIST_MOVIES)
-    Single<ResponseCreateAccessToken> getListMovies(@Path("list_id") int listId, @QueryMap Map<String, String> options);
+    Single<ResponseMovies> getListMovies(@Path("list_id") int listId, @QueryMap Map<String, String> options);
 
     @Headers("Content-Type: application/json")
     @POST(ApiEndPoint.ENDPOINT_POPULAR_MOVIES)

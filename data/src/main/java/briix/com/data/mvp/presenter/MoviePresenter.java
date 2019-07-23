@@ -96,11 +96,11 @@ public class MoviePresenter<V extends MovieView> extends BasePresenter<MovieView
     public void getListMovies(int mListId, Map<String, String> mOptions) {
         final int service = MServicesMovie.GET_LIST_MOVIES;
         getMvpView().showLoading();
-        final Observable<ResponseCreateAccessToken> observable = mMovieService.getListMovies(mListId, mOptions);
-        Disposable disposable = observable.compose(CommonUtils.<ResponseCreateAccessToken>applySchedulers())
-                .subscribeWith(new DisposableObserver<ResponseCreateAccessToken>() {
+        final Observable<ResponseMovies> observable = mMovieService.getListMovies(mListId, mOptions);
+        Disposable disposable = observable.compose(CommonUtils.<ResponseMovies>applySchedulers())
+                .subscribeWith(new DisposableObserver<ResponseMovies>() {
                     @Override
-                    public void onNext(ResponseCreateAccessToken response) {
+                    public void onNext(ResponseMovies response) {
                         getMvpView().hideLoading();
                         if (response != null) {
                             getMvpView().onSuccessGetListMovies(response);

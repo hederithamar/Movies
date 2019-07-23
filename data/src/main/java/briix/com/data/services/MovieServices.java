@@ -24,7 +24,7 @@ public class MovieServices {
         return mMovieApi.createAccessToken(mRequest).toObservable();
     }
 
-    public Observable<ResponseCreateAccessToken> getListMovies(int mListId, Map<String, String> mOptions) {
+    public Observable<ResponseMovies> getListMovies(int mListId, Map<String, String> mOptions) {
         return mMovieApi.getListMovies(mListId, mOptions).toObservable();
     }
 

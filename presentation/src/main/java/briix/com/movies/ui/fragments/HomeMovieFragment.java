@@ -16,22 +16,28 @@ import java.util.List;
 
 import briix.com.movies.R;
 import briix.com.movies.adapter.MovieAdapter;
+import briix.com.movies.adapter.MovieSmallAdapter;
 import briix.com.movies.databinding.FragmentHomeMovieBinding;
 import briix.com.movies.model.Movie;
 import briix.com.movies.realm.RealmController;
 import briix.com.movies.realm.model.ComingMovieEntity;
+import briix.com.movies.realm.model.GeneralMovieEntity;
+import briix.com.movies.realm.model.PopularMovieEntity;
 
 
-public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemClickListener {
+public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemClickListener , MovieSmallAdapter.OnItemClickListener {
     public static String TAG = "HomeMovieFragment";
     private FragmentHomeMovieBinding mBinding;
     private FragmentActivity mActivity;
     private Bundle mBundle;
     private FragmentManager mFragmentManager;
-    private ArrayList<ComingMovieEntity> movies;
+    private ArrayList<GeneralMovieEntity> movies;
     private List<Movie> mMovieList = new ArrayList<>();
     private MovieAdapter mMovieAdapter;
 
+    private ArrayList<PopularMovieEntity> moviesPopular;
+    private List<Movie> mMoviePopularList = new ArrayList<>();
+    private MovieSmallAdapter mMoviePopularAdapter;
 
 
     public HomeMovieFragment() {
@@ -58,24 +64,40 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
     }
 
     public void initMovies() {
-        movies = RealmController.withInstance().getPopularMovies();
-        for (ComingMovieEntity movieEntity : movies) {
+        movies = RealmController.withInstance().getGeneralMovies();
+        for (GeneralMovieEntity movieEntity : movies) {
             mMovieList.add(new Movie(movieEntity));
+        }
+
+        moviesPopular = RealmController.withInstance().getPopularMovies();
+        for (PopularMovieEntity movieEntity : moviesPopular) {
+            mMoviePopularList.add(new Movie(movieEntity));
         }
     }
 
     public void initRecycler() {
         mBinding.recyclerMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        swapItemFilterDay();
+        mBinding.recyclerFavorite.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        swapItemGeneral();
+        swapItemFavorite();
     }
 
-    public void swapItemFilterDay() {
+    public void swapItemGeneral() {
 
         if (mMovieAdapter != null) {
             mMovieAdapter.swapItems(mMovieList);
         } else {
             mMovieAdapter = new MovieAdapter(mMovieList, getContext());
             mBinding.recyclerMovies.setAdapter(mMovieAdapter);
+        }
+    }
+
+    public void swapItemFavorite() {
+        if (mMoviePopularAdapter != null) {
+            mMoviePopularAdapter.swapItems(mMoviePopularList);
+        } else {
+            mMoviePopularAdapter = new MovieSmallAdapter(mMoviePopularList, getContext());
+            mBinding.recyclerFavorite.setAdapter(mMoviePopularAdapter);
         }
     }
 
@@ -100,6 +122,11 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
 
     @Override
     public void onClickMovie(MovieAdapter.ViewHolder holder, View view, Movie mMovie) {
+
+    }
+
+    @Override
+    public void onClickMovie(MovieSmallAdapter.ViewHolder holder, View view, Movie mMovie) {
 
     }
 }

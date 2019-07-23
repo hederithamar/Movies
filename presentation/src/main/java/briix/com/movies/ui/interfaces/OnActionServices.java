@@ -6,5 +6,6 @@ public interface OnActionServices {
 
         void onGetToken();
         void onValidatePassToken();
+        void onGetListMovies();
     }
 }

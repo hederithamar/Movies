@@ -5,12 +5,14 @@ import java.util.List;
 import briix.com.data.mvp.model.response.ResponseMovie;
 import briix.com.data.mvp.model.response.ResponseMovies;
 import briix.com.movies.realm.model.ComingMovieEntity;
+import briix.com.movies.realm.model.GeneralMovieEntity;
 import briix.com.movies.realm.model.PopularMovieEntity;
 import briix.com.movies.realm.model.TopRatedMovieEntity;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+import static briix.com.data.MServicesMovie.GET_LIST_MOVIES;
 import static briix.com.data.MServicesMovie.GET_POPULAR_MOVIES;
 import static briix.com.data.MServicesMovie.GET_TOP_RATED_MOVIES;
 import static briix.com.data.MServicesMovie.GET_UPCOMING_MOVIES;
@@ -26,6 +28,7 @@ public class MasterCatalog extends RealmObject {
     private int page;
     private int total_results;
     private int total_pages;
+    private RealmList<GeneralMovieEntity> movieGeneralList;
     private RealmList<PopularMovieEntity> moviePopularList;
     private RealmList<TopRatedMovieEntity> movieTopList;
     private RealmList<ComingMovieEntity> movieComingList;
@@ -83,9 +86,25 @@ public class MasterCatalog extends RealmObject {
         this.movieComingList = movieComingList;
     }
 
+    public RealmList<GeneralMovieEntity> getMovieGeneralList() {
+        return movieGeneralList;
+    }
+
+    public void setMovieGeneralList(RealmList<GeneralMovieEntity> movieGeneralList) {
+        this.movieGeneralList = movieGeneralList;
+    }
+
     private void buildRealmListObjects(ResponseMovies response, int service) {
 
         switch (service) {
+            case GET_LIST_MOVIES:
+                movieGeneralList = new RealmList<>();
+                List<ResponseMovie> mGeneralList = response.getMovieList();
+                if (mGeneralList != null)
+                    for (ResponseMovie movie : mGeneralList) {
+                        movieGeneralList.add(new GeneralMovieEntity(movie, service));
+                    }
+                break;
             case GET_POPULAR_MOVIES:
                 moviePopularList = new RealmList<>();
                 List<ResponseMovie> mPopularList = response.getMovieList();

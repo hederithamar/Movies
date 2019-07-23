@@ -38,18 +38,14 @@ public class InterceptorApiMovieService implements Interceptor {
                 .build();
 
         Request.Builder requestBuilder;
-
-        if (mPreferences.getAccessToken() == null || mPreferences.getAccessToken().isEmpty()) {
-            // Request customization: add request headers
-            requestBuilder = originalRequest.newBuilder()
-                    .addHeader("Authorization", "Bearer " + mAccessToken)
-                    .url(url);
-        } else {
-            // Request customization: add request headers
+        if (originalRequest.header("No-Authentication") == null) {
             requestBuilder = originalRequest.newBuilder()
                     .addHeader("Authorization", "Bearer " + mPreferences.getAccessToken())
                     .url(url);
-
+        } else {
+            requestBuilder = originalRequest.newBuilder()
+                    .addHeader("Authorization", "Bearer " + mAccessToken)
+                    .url(url);
         }
 
 
