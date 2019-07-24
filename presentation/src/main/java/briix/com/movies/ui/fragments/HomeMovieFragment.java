@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,7 @@ import briix.com.movies.realm.model.PopularMovieEntity;
 
 public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemClickListener , MovieSmallAdapter.OnItemClickListener {
     public static String TAG = "HomeMovieFragment";
+    public static final String BUNDLE_MOVIE = "BUNDLE_MOVIE";
     private FragmentHomeMovieBinding mBinding;
     private FragmentActivity mActivity;
     private Bundle mBundle;
@@ -54,15 +58,25 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_movie, container, false);
 
-        initMovies();
-        initRecycler();
-        initListener();
+        loadData();
+        mBinding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+                mBinding.swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         return mBinding.getRoot();
 
+    }
+
+    private void loadData(){
+        initMovies();
+        initRecycler();
+        initListener();
     }
 
     private void initListener() {
@@ -75,7 +89,7 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
         for (GeneralMovieEntity movieEntity : movies) {
             mMovieList.add(new Movie(movieEntity));
         }
-
+        moviesPopular = RealmController.withInstance().getPopularMovies();
         moviesPopular = RealmController.withInstance().getPopularMovies();
         for (PopularMovieEntity movieEntity : moviesPopular) {
             mMoviePopularList.add(new Movie(movieEntity));
@@ -85,6 +99,8 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
     public void initRecycler() {
         mBinding.recyclerMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mBinding.recyclerFavorite.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        mBinding.recyclerMovies.setHasFixedSize(true);
+        mBinding.recyclerFavorite.setHasFixedSize(true);
         swapItemGeneral();
         swapItemFavorite();
     }
@@ -93,6 +109,7 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
 
         if (mMovieAdapter != null) {
             mMovieAdapter.swapItems(mMovieList);
+            mBinding.recyclerMovies.setAdapter(mMovieAdapter);
         } else {
             mMovieAdapter = new MovieAdapter(mMovieList, getContext());
             mBinding.recyclerMovies.setAdapter(mMovieAdapter);
@@ -102,6 +119,7 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
     public void swapItemFavorite() {
         if (mMoviePopularAdapter != null) {
             mMoviePopularAdapter.swapItems(mMoviePopularList);
+            mBinding.recyclerFavorite.setAdapter(mMovieAdapter);
         } else {
             mMoviePopularAdapter = new MovieSmallAdapter(mMoviePopularList, getContext());
             mBinding.recyclerFavorite.setAdapter(mMoviePopularAdapter);
@@ -130,6 +148,11 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
     @Override
     public void onClickMovie(MovieAdapter.ViewHolder holder, View view, Movie mMovie) {
         Toast.makeText(getActivity(), mMovie.getOriginalTitle(), Toast.LENGTH_SHORT).show();
+        mBundle = new Bundle();
+        mBundle.putParcelable(BUNDLE_MOVIE, mMovie);
+
+        Navigation.findNavController(getActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.openMovieDetailsFragment, mBundle);
     }
 
     @Override

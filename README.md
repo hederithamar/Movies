@@ -5,7 +5,7 @@ Movies Test es una aplicación basada en la arquitectura limpia (clean architect
 
 ![Screenshots](https://github.com/hederithamar/Movies/blob/master/screenshots/app.png)
 ### Motivacion de crear una app: ###
-He estado aprendiendo sobre patrones de diseño, principios de desarrollo (SOLID) y arquitectura de aplicaciones (), estaos temas me facinan y quiero aplicalos y dispuesto a enseñar como mejoran la calidad de una aplicación para que sea mantenible y escalable, aplicando las siguientes herraminetas.
+He estado aprendiendo sobre patrones de diseño, principios de desarrollo (SOLID) y arquitectura de aplicaciones (Clean Architecture), estos temas me facinan, quiero aplicalos y enseñar como mejoran la calidad de una aplicación para que sea mantenible y escalable, aplicando las siguientes herramientas.
 
 1.- El principio de responsabilidad única (SRP):
 - Una clase debe tener una, y solo una, razón para cambiar.
@@ -23,13 +23,13 @@ He estado aprendiendo sobre patrones de diseño, principios de desarrollo (SOLID
 - Los módulos de alto nivel no deben depender de módulos de bajo nivel. Ambos deben depender de las abstracciones.
 - Las abstracciones no deben depender de los detalles. Los detalles deben depender de las abstracciones.
 
-Estos principios son importantes a la hora de contruir codigo legible y de buena calidad, pero cumplirlos al 100 es un reto.
+Estos principios son importantes a la hora de contruir código legible y de buena calidad, pero cumplirlos al 100 es un reto.
 
 MVP:
-El patrón MVP nos permite desacoplar los componentes, vistas, reutilizar presentadores y testear la logica de la presentación.
+El patrón MVP nos permite desacoplar los componentes, vistas, reutilizar presentadores y testear la lógica de la presentación.
 
 Arquitectura limpia(Clean architecture):
-P.S: [Recomiendo leer este articulo es la feunte de inspiración de muchos desarrolladores.](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+P.S: [Recomiendo leer este artículo es la fuente de inspiración de muchos desarrolladores.](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 A grandes rasgos clean propone una forma de crear aplicaciones con los siguientes principios:
 - Independiente de Frameworks
 - Testeable
@@ -53,7 +53,7 @@ Ademas que toma los Principios SOLID como base y es adecuable a cualquier patron
 
 ### Cómo ejecutar la aplicación: ###
 Esta aplicación utiliza [la API publica de MovieDB V4](https://developers.themoviedb.org/4/getting-started).
-Regístrese (es gratis) y tome su api key y acces token v4, luego péguela dentro:.../res/values/api_key.xml
+Regístrese (es gratis) y tome su api key y access token v4, luego péguela dentro:.../res/values/api_key.xml
 
 ### //TODO: ###
 - Añadir pruebas de interfaz de usuario.
