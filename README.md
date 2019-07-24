@@ -3,12 +3,7 @@
 ### Resumen: ###
 Movies Test es una aplicación basada en la arquitectura limpia (clean architecture) escrita en Java.
 
-![Screenshots](https://github.com/hederithamar/Movies/blob/master/screenshots/01.png)
-![Screenshots](https://github.com/hederithamar/Movies/blob/master/screenshots/02.png)
-![Screenshots](https://github.com/hederithamar/Movies/blob/master/screenshots/03.png)
-![Screenshots](https://github.com/hederithamar/Movies/blob/master/screenshots/04.png)
-![Screenshots](https://github.com/hederithamar/Movies/blob/master/screenshots/home.png)
-
+![Screenshots](https://github.com/hederithamar/Movies/blob/master/screenshots/app.png)
 ### Motivacion de crear una app: ###
 He estado aprendiendo sobre patrones de diseño, principios de desarrollo (SOLID) y arquitectura de aplicaciones (), estaos temas me facinan y quiero aplicalos y dispuesto a enseñar como mejoran la calidad de una aplicación para que sea mantenible y escalable, aplicando las siguientes herraminetas.
 
