@@ -19,7 +19,7 @@ public class DialogUtils {
                                                            String acceptText, String cancelText,
                                                            DialogInterface.OnClickListener listener) {
 
-        if (clave.isEmpty() || clave.equals("401") || clave.equals("404") || clave.equals("500")) {
+        if (clave.equals("401") || clave.equals("404") || clave.equals("500")) {
             return showMessageBlurDialogGeneric(activity, title, message,
                     acceptText, null, listener, R.drawable.ic_dialog_info);
         } else {

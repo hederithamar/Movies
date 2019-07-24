@@ -15,4 +15,7 @@
     <string name="action_retry">Reintentar</string>
 
     <string name="url_access">https://www.themoviedb.org/auth/access?request_token=%s</string>
+    <string name="tutorial_auth_title">Autenticación Aprobar Token</string>
+    <string name="tutorial_auth">Es necesario aprobar el token de acceso via web, a continuación cargara la pagina de TMDb, autentifiquese y después le pedira que active el token una vez activado avance a la siguiente sección en el toolbar.</string>
+
 </resources>

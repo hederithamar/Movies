@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +59,15 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
 
         initMovies();
         initRecycler();
+        initListener();
 
         return mBinding.getRoot();
 
+    }
+
+    private void initListener() {
+        mMovieAdapter.setOnItemClickListener(this);
+        mMoviePopularAdapter.setOnItemClickListener(this);
     }
 
     public void initMovies() {
@@ -122,11 +129,11 @@ public class HomeMovieFragment extends Fragment implements MovieAdapter.OnItemCl
 
     @Override
     public void onClickMovie(MovieAdapter.ViewHolder holder, View view, Movie mMovie) {
-
+        Toast.makeText(getActivity(), mMovie.getOriginalTitle(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClickMovie(MovieSmallAdapter.ViewHolder holder, View view, Movie mMovie) {
-
+        Toast.makeText(getActivity(), mMovie.getOriginalTitle(), Toast.LENGTH_SHORT).show();
     }
 }

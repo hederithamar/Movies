@@ -14,7 +14,6 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import briix.com.data.mvp.model.base.Error;
-import briix.com.data.mvp.model.response.ResponseMovies;
 import briix.com.data.mvp.presenter.MovieMvpPresenter;
 import briix.com.data.mvp.view.MovieView;
 import briix.com.data.preferences.Preferences;
@@ -91,7 +90,9 @@ public class SplashActivity extends BaseMvpActivity implements MovieView, OnActi
     @Override
     public void onSuccessGetToken(TokenEntity response) {
         mToken = response.getRequestToken();
-        navigateWebView();
+        DialogUtils.showMessageBlurDialogGeneric(this, "01",
+                getString(R.string.tutorial_auth_title), getString(R.string.tutorial_auth),
+                getString(R.string.action_accept), null, authListener);
     }
 
     @Override
@@ -127,7 +128,6 @@ public class SplashActivity extends BaseMvpActivity implements MovieView, OnActi
     @Override
     public void onSuccessGetUpcomingMovies(MoviesEntity response) {
         RealmController.withInstance().updateCatalog(response, GET_UPCOMING_MOVIES);
-        launchMain();
     }
 
     @Override
@@ -242,6 +242,13 @@ public class SplashActivity extends BaseMvpActivity implements MovieView, OnActi
     DialogInterface.OnClickListener coexistenceListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
+        }
+    };
+
+    DialogInterface.OnClickListener authListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            navigateWebView();
         }
     };
 }
