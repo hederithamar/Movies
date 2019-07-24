@@ -54,7 +54,7 @@ subprojects {
 
 ext {
     deps = [
-            annotations     : 'com.android.support:support-annotations:27.1.1',
+            annotations     : 'androidx.annotation:annotation:1.0.0',
 
             appcompat       : 'com.android.support:appcompat-v7:27.1.1',
 

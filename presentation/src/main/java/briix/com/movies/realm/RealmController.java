@@ -1,11 +1,10 @@
 package briix.com.movies.realm;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
 
-import briix.com.data.mvp.model.response.ResponseMovies;
 import briix.com.domain.entities.home.MoviesEntity;
 import briix.com.movies.realm.model.ComingMovieEntity;
 import briix.com.movies.realm.model.GeneralMovieEntity;

@@ -1,6 +1,6 @@
 package briix.com.data.mvp.presenter.base;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.IOException;
 

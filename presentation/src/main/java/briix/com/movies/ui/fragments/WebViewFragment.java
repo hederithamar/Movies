@@ -2,12 +2,12 @@ package briix.com.movies.ui.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
+import androidx.databinding.DataBindingUtil;
+
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

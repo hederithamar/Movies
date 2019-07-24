@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background">
@@ -21,7 +21,7 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/anim_movie_load" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,6 +36,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias=".9" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

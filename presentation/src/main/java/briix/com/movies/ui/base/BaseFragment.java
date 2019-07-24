@@ -3,8 +3,8 @@ package briix.com.movies.ui.base;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import briix.com.data.mvp.view.MvpView;
 import briix.com.movies.R;

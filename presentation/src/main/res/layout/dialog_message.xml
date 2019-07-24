@@ -35,7 +35,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp">
 
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image_close"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -43,7 +43,7 @@
                         app:srcCompat="@drawable/ic_dialog_close" />
                 </FrameLayout>
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                     android:visibility="gone"
                     tools:text="INFORMATION" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -66,11 +66,11 @@
                     android:textColor="@color/colorWhite"
                     tools:text="DIALOG CONTENT" />
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <android.support.v7.widget.AppCompatButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/button_continue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                         tools:text="Continuar"
                         tools:visibility="visible" />
 
-                    <android.support.v7.widget.AppCompatButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/button_cancel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                         app:layout_constraintWidth_percent="0.75"
                         tools:text="Cancelar"
                         tools:visibility="visible" />
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </LinearLayout>
@@ -117,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image_circle"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
